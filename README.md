@@ -3,6 +3,9 @@
 
 It exposes useful methods and properties that let you navigate back and forth through the user's history, and manipulate the contents of the history stack.
 
+<b>Live Previews</b>
+
+https://jsfiddle.net/ux7em4dy/
 
 <b>Example</b>
 
