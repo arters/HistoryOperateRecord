@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>回到上一步</title>
+    
+    <script type="text/javascript" src="OperateRecord.js"></script>
+</head>
+<body>
+
+
+<button id="addBtn">增加操作</button>
+<button id="previousBtn">回到上一步</button>
+<span id="currentVal"> - </span>
+<button id="nextBtn">前往下一步</button>
+<button id="cleanBtn">清除紀錄</button>
+<p id="demo"></p><br>
+currentStep: <span id="currentStep"></span><br>
+stack: <span id="stack"></span>
+
+<script>
+let addElm = document.getElementById("addBtn");
+let previousElm = document.getElementById("previousBtn");
+let nextElm = document.getElementById("nextBtn");
+let cleanElm = document.getElementById("cleanBtn");
+addElm.addEventListener("click", myFunction);
+previousElm.addEventListener("click", previousFunction);
+nextElm.addEventListener("click", nextFunction);
+cleanElm.addEventListener("click", cleanFunction);
+
+let operate = new OperateRecord(); // 設置一個共用記憶物件
+operate.setMaxStep(10); // 初始化記憶數
+showNextPreviousButton();
+
+function showNextPreviousButton() {
+    previousElm.disabled = true; // 變更欄位為禁用
+    nextElm.disabled = true; // 變更欄位為禁用=
+    if(operate.allowPrevious()){
+        previousElm.disabled = false; // 變更欄位為可用
+    }
+    if(operate.allowNnext()){
+        nextElm.disabled = false; // 變更欄位為可用
+    }
+}
+
+function cleanFunction() {
+    operate.clean();
+    document.getElementById("currentVal").innerHTML = '';
+    document.getElementById("currentStep").innerHTML = operate.getCurrentStep();
+    document.getElementById("stack").innerHTML = operate.records().join(', ');
+
+    showNextPreviousButton();
+}
+
+function previousFunction() {
+    let val = operate.previous();
+    if(val){
+        document.getElementById("currentVal").innerHTML = val
+        document.getElementById("currentStep").innerHTML = operate.getCurrentStep();
+        document.getElementById("stack").innerHTML = operate.records().join(', ');
+        showNextPreviousButton();
+    };
+}
+
+function nextFunction() {
+    let val = operate.next();
+    if(val){
+        document.getElementById("currentVal").innerHTML = val;
+        document.getElementById("currentStep").innerHTML = operate.getCurrentStep();
+        document.getElementById("stack").innerHTML = operate.records().join(', ');
+        showNextPreviousButton();
+    }
+}
+
+function myFunction() {
+    document.getElementById("demo").innerHTML = "新增操作";
+    var d = new Date();
+    operate.add('val' + d.toLocaleString());
+
+    let val = operate.getCurrentVal();
+    if(val){
+        document.getElementById("currentVal").innerHTML = val;
+    }
+    document.getElementById("currentStep").innerHTML = operate.getCurrentStep();
+    document.getElementById("stack").innerHTML = operate.records().join(', ');
+    showNextPreviousButton();
+}
+
+</script>
