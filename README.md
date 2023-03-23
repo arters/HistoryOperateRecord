@@ -48,7 +48,7 @@ if(operate.allowNnext()){
 
 清除所有使用者操作歷史紀錄 (Clear user all operation history)
 ```javascript
-operate.clean();
+operate.clear();
 ```
 
 列出所有使用者操作紀錄 (List user all operation history)
