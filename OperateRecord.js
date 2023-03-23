@@ -1,7 +1,7 @@
 /**
  * 歷史操作紀錄
  * Provide the ability to track history on User object.
- * 2022/05/25 Jwu
+ * 2023/03/23 Jwu
  */
  var OperateRecord = function () {
     this.maxStep = 5;
@@ -116,7 +116,7 @@
      * 清除紀錄
      * @param {void}
     */
-    this.clean = function() {
+    this.clear = function() {
         this.currentStep = 1;// 將指針移動最後筆
         this.stack.length = 0;
         return this.stack;
