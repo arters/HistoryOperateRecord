@@ -14,7 +14,7 @@
 <button id="previousBtn">回到上一步</button>
 <span id="currentVal"> - </span>
 <button id="nextBtn">前往下一步</button>
-<button id="cleanBtn">清除紀錄</button>
+<button id="clearBtn">清除紀錄</button>
 <p id="demo"></p><br>
 currentStep: <span id="currentStep"></span><br>
 stack: <span id="stack"></span>
@@ -23,11 +23,11 @@ stack: <span id="stack"></span>
 let addElm = document.getElementById("addBtn");
 let previousElm = document.getElementById("previousBtn");
 let nextElm = document.getElementById("nextBtn");
-let cleanElm = document.getElementById("cleanBtn");
+let clearElm = document.getElementById("clearBtn");
 addElm.addEventListener("click", myFunction);
 previousElm.addEventListener("click", previousFunction);
 nextElm.addEventListener("click", nextFunction);
-cleanElm.addEventListener("click", cleanFunction);
+clearElm.addEventListener("click", clearFunction);
 
 let operate = new OperateRecord(); // 設置一個共用記憶物件
 operate.setMaxStep(10); // 初始化記憶數
@@ -44,8 +44,8 @@ function showNextPreviousButton() {
     }
 }
 
-function cleanFunction() {
-    operate.clean();
+function clearFunction() {
+    operate.clear();
     document.getElementById("currentVal").innerHTML = '';
     document.getElementById("currentStep").innerHTML = operate.getCurrentStep();
     document.getElementById("stack").innerHTML = operate.records().join(', ');
